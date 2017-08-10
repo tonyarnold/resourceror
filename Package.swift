@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Resourceror",
     products: [
-        .executable(name: "resourceror", targets: ["Resourceror"]),
+        .executable(name: "rsrcrr", targets: ["Resourceror"]),
         .library(name: "ResourcerorCore", targets: ["ResourcerorCore"])
     ],
     dependencies: [
