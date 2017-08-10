@@ -36,21 +36,22 @@ final class InterfaceBuilderDocumentScanner: ResourceScanning {
         let fileResult = ScanResult(type: .nibName, identifier: file.nameExcludingExtension)
         results.insert(fileResult)
 
-        Regex("<([A-Za-z0-9]+).* identifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
-            .allMatches(in: fileContents).forEach { match in
-                guard
-                    let tagName = match.captures[0],
-                    let identifier = match.captures[1],
-                    InterfaceBuilderDocumentScanner.ignoredTags.contains(tagName) == false
-                    else {
-                        return
-                }
+        type(of: self).identifierRegex.allMatches(in: fileContents).forEach { match in
+            guard
+                let tagName = match.captures[0],
+                let identifier = match.captures[1],
+                InterfaceBuilderDocumentScanner.ignoredTags.contains(tagName) == false
+            else {
+                return
+            }
 
-                let resultType: ResultType = tagName == "segue" ? .storyboardSegueIdentifier : .userInterfaceItemIdentifier
-                let newResult = ScanResult(type: resultType, identifier: identifier)
-                results.insert(newResult)
+            let resultType: ResultType = tagName == "segue" ? .storyboardSegueIdentifier : .userInterfaceItemIdentifier
+            let newResult = ScanResult(type: resultType, identifier: identifier)
+            results.insert(newResult)
         }
 
         return results
     }
+
+    private static let identifierRegex = Regex("<([A-Za-z0-9]+).* identifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
 }

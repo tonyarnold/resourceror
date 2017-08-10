@@ -36,29 +36,30 @@ final class StoryboardScanner: ResourceScanning {
         let fileResult = ScanResult(type: .storyboardName, identifier: file.nameExcludingExtension)
         results.insert(fileResult)
 
-        Regex("<[windowController|viewController].* storyboardIdentifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
-            .allMatches(in: fileContents).forEach { match in
-                guard let identifier = match.captures[0] else { return }
+        type(of: self).storyboardIdentifierRegex.allMatches(in: fileContents).forEach { match in
+            guard let identifier = match.captures[0] else { return }
 
-                let newResult = ScanResult(type: .storyboardSceneIdentifier, identifier: identifier)
-                results.insert(newResult)
+            let newResult = ScanResult(type: .storyboardSceneIdentifier, identifier: identifier)
+            results.insert(newResult)
         }
 
-        Regex("<([A-Za-z0-9]+).* identifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
-            .allMatches(in: fileContents).forEach { match in
-                guard
-                    let tagName = match.captures[0],
-                    let identifier = match.captures[1],
-                    StoryboardScanner.ignoredTags.contains(tagName) == false
-                    else {
-                        return
-                }
+        type(of: self).identifierRegex.allMatches(in: fileContents).forEach { match in
+            guard
+                let tagName = match.captures[0],
+                let identifier = match.captures[1],
+                StoryboardScanner.ignoredTags.contains(tagName) == false
+            else {
+                return
+            }
 
-                let resultType: ResultType = tagName == "segue" ? .storyboardSegueIdentifier : .userInterfaceItemIdentifier
-                let newResult = ScanResult(type: resultType, identifier: identifier)
-                results.insert(newResult)
+            let resultType: ResultType = tagName == "segue" ? .storyboardSegueIdentifier : .userInterfaceItemIdentifier
+            let newResult = ScanResult(type: resultType, identifier: identifier)
+            results.insert(newResult)
         }
 
         return results
     }
+
+    private static let identifierRegex = Regex("<([A-Za-z0-9]+).* identifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
+    private static let storyboardIdentifierRegex = Regex("<[windowController|viewController].* storyboardIdentifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
 }
