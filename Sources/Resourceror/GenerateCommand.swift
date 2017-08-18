@@ -19,13 +19,15 @@ class GenerateCommand: Command {
     let shortDescription = "Generates resource list"
 
     let sourceDirectory = OptionalParameter()
+    let excludedPathNames = Key<String>("-e", "--exclude", usage: "Comma separated list of directory or file names to exclude")
 
     func execute() throws {
         let pathToScan = sourceDirectory.value ?? "."
         let urlToScan = URL(fileURLWithPath: pathToScan, isDirectory: true, relativeTo: currentWorkingDirectoryURL)
+        let excludedDirectories: [String] = excludedPathNames.value?.split(separator: ",").flatMap { String($0) } ?? []
 
         do {
-            try ResourceListGenerator().scanDirectory(at: urlToScan)
+            try ResourceListGenerator().scanDirectory(at: urlToScan, excluding: excludedDirectories)
         } catch let error {
             printError(error.localizedDescription)
         }
