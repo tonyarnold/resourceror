@@ -13,8 +13,6 @@
 import Foundation
 import SwiftCLI
 
-let currentWorkingDirectoryURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-
-CLI.setup(name: "resourceror", version: "1.0", description: "Resourceror - generate Swift names for your resources")
+CLI.setup(name: "resourceror", version: "1.0", description: "Resourceror - generate Swift names for your Xcode project resources")
 CLI.register(command: GenerateCommand())
-_ = CLI.go()
+CLI.go()

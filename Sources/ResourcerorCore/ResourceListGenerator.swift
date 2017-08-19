@@ -16,8 +16,6 @@ import Regex
 
 public final class ResourceListGenerator {
 
-    public init() {}
-
     let scanners: [ResourceScanning] = [
         StoryboardScanner(),
         InterfaceBuilderDocumentScanner(),
@@ -58,4 +56,3 @@ public final class ResourceListGenerator {
         }
     }
 }
-

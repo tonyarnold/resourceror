@@ -53,5 +53,6 @@ final class InterfaceBuilderDocumentScanner: ResourceScanning {
         return results
     }
 
+    private static let deploymentIdentifierRegex = Regex("<deployment identifier=\"([A-Za-z0-9]+)\"/>", options: .anchorsMatchLines)
     private static let identifierRegex = Regex("<([A-Za-z0-9]+).* identifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
 }

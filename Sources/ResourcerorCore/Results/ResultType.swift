@@ -13,7 +13,7 @@
 import Foundation
 
 enum ResultType: String, Hashable {
-
+    
     case image = "NSImage.Name"
     case nibName = "NSNib.Name"
     case storyboardName = "NSStoryboard.Name"
@@ -35,8 +35,6 @@ enum ResultType: String, Hashable {
     }
 
     private func variableName(using fileName: String) -> String {
-        return fileName
-            .camelCaseCharactersFollowing(in: CharacterSet.alphanumerics.inverted, with: "")
-            .lowercasedFirstCharacter()
+        return fileName.camelCased()
     }
 }

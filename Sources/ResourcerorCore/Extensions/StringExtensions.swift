@@ -13,12 +13,13 @@
 import Foundation
 
 extension String {
-    func replacingCharacters(in characterSet: CharacterSet, with separator: String) -> String {
-        return components(separatedBy: characterSet).joined(separator: separator)
+
+    func pascalCased(followingCharacters characterSet: CharacterSet = CharacterSet.alphanumerics.inverted) -> String {
+        return components(separatedBy: characterSet).map { $0.uppercasedFirstCharacter() }.joined(separator: "")
     }
 
-    func camelCaseCharactersFollowing(in characterSet: CharacterSet, with separator: String) -> String {
-        return components(separatedBy: characterSet).map { $0.uppercasedFirstCharacter() }.joined(separator: separator)
+    func camelCased(followingCharacters characterSet: CharacterSet = CharacterSet.alphanumerics.inverted) -> String {
+        return pascalCased(followingCharacters: characterSet).lowercasedFirstCharacter()
     }
 
     func lowercasedFirstCharacter() -> String {
@@ -36,6 +37,4 @@ extension String {
         let firstIndex = index(startIndex, offsetBy: 1)
         return self[..<firstIndex].uppercased() + self[firstIndex...]
     }
-
 }
-

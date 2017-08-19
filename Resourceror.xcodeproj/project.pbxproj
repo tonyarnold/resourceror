@@ -335,7 +335,7 @@
 			path = ".build/checkouts/SwiftCLI-8466703425035036135/Sources";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -346,7 +346,6 @@
 				OBJ_28 /* Dependencies */,
 				OBJ_63 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_60 /* Files 1.10.0 */ = {
@@ -548,7 +547,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_63 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

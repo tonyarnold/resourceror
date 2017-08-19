@@ -16,20 +16,24 @@ import SwiftCLI
 
 class GenerateCommand: Command {
     let name = "generate"
-    let shortDescription = "Generates resource list"
+    let shortDescription = "Generates a list of images, XIB and Storyboard files and their contained identifiers"
 
     let sourceDirectory = OptionalParameter()
     let excludedPathNames = Key<String>("-e", "--exclude", usage: "Comma separated list of directory or file names to exclude")
 
+    private let generator = ResourceListGenerator()
+    private let currentWorkingDirectoryURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+
     func execute() throws {
+        // If no path has been passed on the command line, use the current working directory as the path to scan.
         let pathToScan = sourceDirectory.value ?? "."
         let urlToScan = URL(fileURLWithPath: pathToScan, isDirectory: true, relativeTo: currentWorkingDirectoryURL)
+        precondition(urlToScan.isFileURL, "\(urlToScan) is not a valid file URL!")
+
+        // Split the list of excluded directory names into an array of names
         let excludedDirectories: [String] = excludedPathNames.value?.split(separator: ",").flatMap { String($0) } ?? []
 
-        do {
-            try ResourceListGenerator().scanDirectory(at: urlToScan, excluding: excludedDirectories)
-        } catch let error {
-            printError(error.localizedDescription)
-        }
+        // Everything is ready, scan the passed file URL
+        try generator.scanDirectory(at: urlToScan, excluding: excludedDirectories)
     }
 }
