@@ -4,14 +4,12 @@ Provide a descriptive summary of the changes in this PR.
 
 - Fixes #9999
 
-
 ## Summary of Changes
 
 Changes proposed in this pull request:
 -
 -
 -
-
 
 ## Items of Note
 

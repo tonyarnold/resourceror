@@ -1,11 +1,15 @@
 // swift-tools-version:4.0
 
+//
+//  Copyright © 2017 Tony Arnold (@tonyarnold)
+//  Licensed under the MIT license. See the LICENSE file for details.
+
 import PackageDescription
 
 let package = Package(
     name: "Resourceror",
     products: [
-        .executable(name: "rsrcrr", targets: ["Resourceror"]),
+        .executable(name: "Resourceror", targets: ["Resourceror"]),
         .library(name: "ResourcerorCore", targets: ["ResourcerorCore"])
     ],
     dependencies: [
