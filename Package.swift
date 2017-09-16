@@ -9,7 +9,7 @@ import PackageDescription
 let package = Package(
     name: "Resourceror",
     products: [
-        .executable(name: "Resourceror", targets: ["Resourceror"]),
+        .executable(name: "resourceror", targets: ["resourceror"]),
         .library(name: "ResourcerorCore", targets: ["ResourcerorCore"])
     ],
     dependencies: [
@@ -19,7 +19,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Resourceror",
+            name: "resourceror",
             dependencies: [
                 "SwiftCLI",
                 "ResourcerorCore"
