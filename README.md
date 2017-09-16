@@ -14,7 +14,7 @@ let backgroundImage = NSImage(named: .backgroundImage)
 
 Neato!
 
-Resourceror currently supports extension `NSImage.Name`, `NSNib.Name`, `NSStoryboard.Name`, `NSStoryboard.SceneIdentifier`, `NSStoryboardSegue.Identifier` `NSUserInterfaceItemIdentifier`. Feel free to submit PRs for anything else you'd like to see generated.
+Resourceror currently supports extension `NSImage.Name`, `NSNib.Name`, `NSStoryboard.Name`, `NSStoryboard.SceneIdentifier`, `NSStoryboardSegue.Identifier` and `NSUserInterfaceItemIdentifier`. Feel free to submit PRs for anything else you'd like to see generated.
 
 It's not quite finished, but you should be able to use it. The project lacks tests,  the code is not polished, and everything needs a bit of work - it meets my needs, and it might be useful to you.
 
@@ -35,27 +35,27 @@ If you use SwiftLint, you'll probably need to surround the output code with comm
 // swiftlint:disable identifier_name
 
 extension NSImage.Name {
-	// …
+    // …
 }
 
 extension NSNib.Name {
-	// …
+    // …
 }
 
 extension NSStoryboard.Name {
-	// …
+    // …
 }
 
 extension NSStoryboard.SceneIdentifier {
-	// …
+    // …
 }
 
 extension NSStoryboardSegue.Identifier {
-	// …
+    // …
 }
 
 extension NSUserInterfaceItemIdentifier {
-	// …
+    // …
 }
 
 // swiftlint:enable identifier_name
