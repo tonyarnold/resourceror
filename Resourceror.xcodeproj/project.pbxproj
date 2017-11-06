@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		901C256E1FAFE1050034CA32 /* AudioFileScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901C256C1FAFE0F90034CA32 /* AudioFileScanner.swift */; };
 		OBJ_101 /* SwiftCLI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftCLI::SwiftCLI::Product" /* SwiftCLI.framework */; };
 		OBJ_102 /* ResourcerorCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Resourceror::ResourcerorCore::Product" /* ResourcerorCore.framework */; };
 		OBJ_103 /* Regex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Regex::Regex::Product" /* Regex.framework */; };
@@ -104,6 +105,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		901C256C1FAFE0F90034CA32 /* AudioFileScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileScanner.swift; sourceTree = "<group>"; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_12 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		OBJ_13 /* ResourceListGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceListGenerator.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		OBJ_17 /* Scanners */ = {
 			isa = PBXGroup;
 			children = (
+				901C256C1FAFE0F90034CA32 /* AudioFileScanner.swift */,
 				OBJ_18 /* ImageFileScanner.swift */,
 				OBJ_19 /* InterfaceBuilderDocumentScanner.swift */,
 				OBJ_20 /* ResourceScanning.swift */,
@@ -313,7 +316,7 @@
 			path = ".build/checkouts/SwiftCLI-8466703425035036135/Sources";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -323,7 +326,6 @@
 				OBJ_27 /* Dependencies */,
 				OBJ_62 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_59 /* Files 1.11.0 */ = {
@@ -525,7 +527,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_62 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -581,6 +583,7 @@
 				OBJ_145 /* ScanResult.swift in Sources */,
 				OBJ_146 /* ImageFileScanner.swift in Sources */,
 				OBJ_147 /* InterfaceBuilderDocumentScanner.swift in Sources */,
+				901C256E1FAFE1050034CA32 /* AudioFileScanner.swift in Sources */,
 				OBJ_148 /* ResourceScanning.swift in Sources */,
 				OBJ_149 /* StoryboardScanner.swift in Sources */,
 			);

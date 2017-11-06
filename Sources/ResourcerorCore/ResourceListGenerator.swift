@@ -13,7 +13,8 @@ public final class ResourceListGenerator {
     let scanners: [ResourceScanning] = [
         StoryboardScanner(),
         InterfaceBuilderDocumentScanner(),
-        ImageFileScanner()
+        ImageFileScanner(),
+        AudioFileScanner()
     ]
 
     public func scanDirectory(at url: URL, excluding: [String] = []) throws {

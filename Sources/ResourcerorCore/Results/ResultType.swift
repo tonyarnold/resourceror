@@ -5,13 +5,21 @@
 import Foundation
 
 enum ResultType: String, Hashable {
-    
+
+    case audio = "NSSound.Name"
     case image = "NSImage.Name"
     case nibName = "NSNib.Name"
     case storyboardName = "NSStoryboard.Name"
+
     case storyboardSceneIdentifier = "NSStoryboard.SceneIdentifier"
     case storyboardSegueIdentifier = "NSStoryboardSegue.Identifier"
     case userInterfaceItemIdentifier = "NSUserInterfaceItemIdentifier"
+
+    case browserColumnsAutosaveName = "NSBrowser.ColumnsAutosaveName"
+    case searchFieldRecentsAutosaveName = "NSSearchField.RecentsAutosaveName"
+    case splitViewAutosaveName = "NSSplitView.AutosaveName"
+    case tableViewAutosaveName = "NSTableView.AutosaveName"
+    case windowFrameAutosaveName = "NSWindow.FrameAutosaveName"
 
     var hashValue: Int {
         return rawValue.hashValue
