@@ -13,8 +13,8 @@ let package = Package(
         .library(name: "ResourcerorCore", targets: ["ResourcerorCore"])
     ],
     dependencies: [
-        .package(url: "https://github.com/johnsundell/Files", .upToNextMajor(from: "1.10.0")),
-        .package(url: "https://github.com/jakeheis/SwiftCLI", .upToNextMajor(from: "3.0.0")),
+        .package(url: "https://github.com/johnsundell/Files", .upToNextMajor(from: "2.0.1")),
+        .package(url: "https://github.com/jakeheis/SwiftCLI", .upToNextMajor(from: "4.0.3")),
         .package(url: "https://github.com/sharplet/Regex", .upToNextMajor(from: "1.1.0"))
     ],
     targets: [

@@ -16,7 +16,7 @@ class GenerateCommand: Command {
     let shortDescription = "Generates a list of images, XIB and Storyboard files and their contained identifiers"
 
     let sourceDirectory = OptionalParameter()
-    let excludedPathNames = Key<String>("-e", "--exclude", usage: "Comma separated list of directory or file names to exclude")
+    let excludedPathNames = Key<String>("-e", "--exclude", description: "Comma separated list of directory or file names to exclude")
 
     private let generator = ResourceListGenerator()
     private let currentWorkingDirectoryURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
