@@ -6,7 +6,6 @@ import Files
 import Foundation
 
 protocol ResourceScanning {
-
     static var fileExtensions: [String] { get }
 
     var filesToScan: [File] { get set }
@@ -18,7 +17,6 @@ protocol ResourceScanning {
 }
 
 extension ResourceScanning {
-
     mutating func appendIfScannable(file: File) {
         guard canScan(file: file) else {
             return

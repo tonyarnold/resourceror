@@ -7,7 +7,6 @@ import ResourcerorCore
 import SwiftCLI
 
 class GenerateCommand: Command {
-
     enum Error: Swift.Error {
         case notFileURL(URL)
     }
@@ -31,7 +30,7 @@ class GenerateCommand: Command {
         }
 
         // Split the list of excluded directory names into an array of names
-        let excludedDirectories: [String] = excludedPathNames.value?.split(separator: ",").flatMap { String($0) } ?? []
+        let excludedDirectories: [String] = excludedPathNames.value?.split(separator: ",").compactMap { String($0) } ?? []
 
         // Everything is ready, scan the passed file URL
         try generator.scanDirectory(at: urlToScan, excluding: excludedDirectories)

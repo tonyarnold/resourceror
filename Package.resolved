@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/johnsundell/Files",
         "state": {
           "branch": null,
-          "revision": "6171f9e9d8619678da22355560f3dbed6368058d",
-          "version": "2.0.1"
+          "revision": "435965437ff7f149b9682aeb6553b5aa14b00402",
+          "version": "2.2.0"
         }
       },
       {
@@ -20,12 +20,21 @@
         }
       },
       {
+        "package": "SwiftPM",
+        "repositoryURL": "https://github.com/apple/swift-package-manager.git",
+        "state": {
+          "branch": null,
+          "revision": "63a01220e93271dc3bf204b9e13dd1aeb2beefee",
+          "version": "0.2.0"
+        }
+      },
+      {
         "package": "SwiftCLI",
         "repositoryURL": "https://github.com/jakeheis/SwiftCLI",
         "state": {
           "branch": null,
-          "revision": "afd7cd100aa18e1ad878279f506fbff71b59ed91",
-          "version": "4.0.3"
+          "revision": "b634c5b94b7ed82a93e5bc5042facaa1be306675",
+          "version": "4.2.0"
         }
       }
     ]

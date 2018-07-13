@@ -5,7 +5,6 @@
 import Foundation
 
 struct ScanResult: Hashable {
-
     let type: ResultType
     let identifier: String
 

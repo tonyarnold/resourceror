@@ -5,11 +5,10 @@
 import Foundation
 
 enum ResultType: String, Hashable {
-
     case audio = "NSSound.Name"
-    case image = "NSImage.Name"
-    case nibName = "NSNib.Name"
-    case storyboardName = "NSStoryboard.Name"
+    case image = "NSImage"
+    case nibName = "NSNib"
+    case storyboardName = "NSStoryboard"
 
     case storyboardSceneIdentifier = "NSStoryboard.SceneIdentifier"
     case storyboardSegueIdentifier = "NSStoryboardSegue.Identifier"
@@ -31,7 +30,18 @@ enum ResultType: String, Hashable {
 
     func outputLine(for fileName: String) -> String {
         let name = variableName(using: fileName)
-        return "static let \(name) = \(rawValue)(rawValue: \"\(fileName)\")"
+        switch self {
+        case .audio, .image:
+            return "static let \(name) = \(rawValue)(named: \"\(fileName)\")!"
+        case .nibName:
+            return "static let \(name) = NSNib(nibNamed: \"\(fileName)\", bundle: Bundle.main)!"
+        case .storyboardName:
+            return "static let \(name) = NSStoryboard(name: \"\(fileName)\", bundle: Bundle.main)"
+        case .userInterfaceItemIdentifier:
+            return "static let \(name) = NSUserInterfaceItemIdentifier(rawValue: \"\(fileName)\")"
+        default:
+            return "static let \(name) = \"\(fileName)\""
+        }
     }
 
     private func variableName(using fileName: String) -> String {

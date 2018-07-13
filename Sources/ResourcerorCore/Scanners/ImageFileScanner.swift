@@ -6,7 +6,6 @@ import Files
 import Foundation
 
 final class ImageFileScanner: ResourceScanning {
-
     static let fileExtensions = ["png", "jpg", "jpeg", "pdf", "jp2"]
 
     var filesToScan = [File]()

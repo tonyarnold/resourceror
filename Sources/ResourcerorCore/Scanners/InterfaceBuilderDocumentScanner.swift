@@ -7,12 +7,11 @@ import Foundation
 import Regex
 
 final class InterfaceBuilderDocumentScanner: ResourceScanning {
-
     static let fileExtensions = ["xib"]
 
     static let ignoredTags = [
         "deployment",
-        "plugIn"
+        "plugIn",
     ]
 
     var filesToScan = [File]()

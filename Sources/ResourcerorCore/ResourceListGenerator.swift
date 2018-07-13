@@ -7,14 +7,13 @@ import Foundation
 import Regex
 
 public final class ResourceListGenerator {
-
     public init() {}
 
     let scanners: [ResourceScanning] = [
         StoryboardScanner(),
         InterfaceBuilderDocumentScanner(),
         ImageFileScanner(),
-        AudioFileScanner()
+        AudioFileScanner(),
     ]
 
     public func scanDirectory(at url: URL, excluding: [String] = []) throws {

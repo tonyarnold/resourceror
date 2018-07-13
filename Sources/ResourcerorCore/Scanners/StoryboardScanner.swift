@@ -7,12 +7,11 @@ import Foundation
 import Regex
 
 final class StoryboardScanner: ResourceScanning {
-
     static let fileExtensions = ["storyboard"]
 
     static let ignoredTags = [
         "deployment",
-        "plugIn"
+        "plugIn",
     ]
 
     var filesToScan = [File]()
@@ -89,7 +88,7 @@ final class StoryboardScanner: ResourceScanning {
 
     private static let deploymentIdentifierRegex = Regex("<deployment identifier=\"([A-Za-z0-9]+)\"/>", options: .anchorsMatchLines)
     private static let identifierRegex = Regex("<([A-Za-z0-9]+).* identifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
-    private static let storyboardIdentifierRegex = Regex("<[windowController|viewController].* storyboardIdentifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
+    private static let storyboardIdentifierRegex = Regex("<[windowController|viewController|splitViewController].* storyboardIdentifier=\"([^\"]+)\".*$", options: .anchorsMatchLines)
     private static let browserViewAutosaveNameRegex = Regex("<browser.* columnsAutosaveName=\"([^\"]+)\".*$", options: .anchorsMatchLines)
     private static let searchFieldAutosaveNameRegex = Regex("<searchField.* recentsAutosaveName=\"([^\"]+)\".*$", options: .anchorsMatchLines)
     private static let splitViewAutosaveNameRegex = Regex("<splitView.* autosaveName=\"([^\"]+)\".*$", options: .anchorsMatchLines)
