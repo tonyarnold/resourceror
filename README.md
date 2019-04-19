@@ -23,8 +23,13 @@ It's not quite finished, but you should be able to use it. The project lacks tes
 Basically, you run this command against a directory containing your images, XIBs, and Storyboards, and it will print a nicely sorted list of properly typed Swift static variables for your resources.
 
 ```sh
-swift run -Xswiftc "-target" -Xswiftc "x86_64-apple-macosx10.11" resourceror generate $PATH_TO_YOUR_DIRECTORY --exclude first_directory,second_directory
+swift run resourceror generate $PATH_TO_YOUR_DIRECTORY --exclude first_directory second_directory
 ```
+
+## Requirements
+
+- macOS 10.13 or newer
+- Xcode 10.2 / Swift 5.0 or newer
 
 ## Notes
 

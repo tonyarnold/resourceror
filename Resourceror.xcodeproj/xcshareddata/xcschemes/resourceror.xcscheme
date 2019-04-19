@@ -14,20 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Resourceror::ResourcerorCore"
-               BuildableName = "ResourcerorCore.framework"
-               BlueprintName = "ResourcerorCore"
-               ReferencedContainer = "container:Resourceror.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "Resourceror::resourceror"
                BuildableName = "resourceror"
                BlueprintName = "resourceror"
@@ -56,15 +42,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Resourceror::ResourcerorCore"
-            BuildableName = "ResourcerorCore.framework"
-            BlueprintName = "ResourcerorCore"
+            BlueprintIdentifier = "Resourceror::resourceror"
+            BuildableName = "resourceror"
+            BlueprintName = "resourceror"
             ReferencedContainer = "container:Resourceror.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

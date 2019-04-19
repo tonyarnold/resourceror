@@ -2,21 +2,39 @@
   "object": {
     "pins": [
       {
+        "package": "CommandRegistry",
+        "repositoryURL": "https://github.com/eneko/CommandRegistry",
+        "state": {
+          "branch": null,
+          "revision": "4c953e485307caf1b97565a0834ac447609647ff",
+          "version": "0.3.0"
+        }
+      },
+      {
         "package": "Files",
         "repositoryURL": "https://github.com/johnsundell/Files",
         "state": {
           "branch": null,
-          "revision": "435965437ff7f149b9682aeb6553b5aa14b00402",
-          "version": "2.2.0"
+          "revision": "a84615f4558151fab52ac38df697ce2442991f93",
+          "version": "2.3.0"
+        }
+      },
+      {
+        "package": "Logger",
+        "repositoryURL": "https://github.com/eneko/Logger.git",
+        "state": {
+          "branch": null,
+          "revision": "146a17c68a442859ec409b2ae1a23d1913d48c5d",
+          "version": "0.0.2"
         }
       },
       {
         "package": "Regex",
-        "repositoryURL": "https://github.com/sharplet/Regex",
+        "repositoryURL": "https://github.com/sharplet/Regex.git",
         "state": {
           "branch": null,
-          "revision": "3e671ed911b467c0d9c05e56f03d9e5bcb535f39",
-          "version": "1.1.0"
+          "revision": "3bf30ed3d28a98737ee7d8c11976e1d707ec168b",
+          "version": "2.0.0"
         }
       },
       {
@@ -24,17 +42,8 @@
         "repositoryURL": "https://github.com/apple/swift-package-manager.git",
         "state": {
           "branch": null,
-          "revision": "63a01220e93271dc3bf204b9e13dd1aeb2beefee",
-          "version": "0.2.0"
-        }
-      },
-      {
-        "package": "SwiftCLI",
-        "repositoryURL": "https://github.com/jakeheis/SwiftCLI",
-        "state": {
-          "branch": null,
-          "revision": "b634c5b94b7ed82a93e5bc5042facaa1be306675",
-          "version": "4.2.0"
+          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
+          "version": "0.3.0"
         }
       }
     ]
