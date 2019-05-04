@@ -17,9 +17,8 @@ final class AssetCatalogScanner: ResourceScanning {
     }
 
     let results = try? folder.makeSubfolderSequence(recursive: true, includeHidden: false)
-      .filter { $0.extension == "colorset" }
-      .compactMap { try self.scanColorSet(folder: $0) }
-      .compactMap { ScanResult(type: .namedColor, identifier: $0) }
+      .filter { $0.extension == "colorset" || $0.extension == "imageset" }
+      .compactMap { try self.scanCatalog(folder: $0) }
 
     return Set(results ?? [])
   }
@@ -32,7 +31,7 @@ final class AssetCatalogScanner: ResourceScanning {
     return metadata.providesNamespace ? folder.name : nil
   }
 
-  private func scanColorSet(folder: Folder) throws -> String {
+  private func scanCatalog(folder: Folder) throws -> ScanResult? {
     let parentFolders = folder.parents(upTo: { item in
       guard let itemExtension = item.extension else {
         return false
@@ -46,11 +45,15 @@ final class AssetCatalogScanner: ResourceScanning {
       .compactMap { try self.scanAssetGroup(folder: $0) }
       .joined(separator: "/")
 
+    let identifier: String
     if prefix.isEmpty {
-      return folder.nameExcludingExtension
+      identifier = folder.nameExcludingExtension
     } else {
-      return prefix + "/" + folder.nameExcludingExtension
+      identifier = prefix + "/" + folder.nameExcludingExtension
     }
+
+    let type: ResultType = folder.extension == "colorset" ? .namedColor : .image
+    return ScanResult(type: type, identifier: identifier)
   }
 }
 
