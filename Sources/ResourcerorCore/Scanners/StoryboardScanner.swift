@@ -7,19 +7,24 @@ import Foundation
 import Regex
 
 final class StoryboardScanner: ResourceScanning {
-  static let fileExtensions = ["storyboard",]
+  static let itemExtensions = ["storyboard"]
 
-  static let ignoredTags = ["deployment", "plugIn",]
+  static let ignoredTags = ["deployment", "plugIn"]
 
-  var filesToScan = [File,]()
+  var itemsToScan = [FileSystem.Item]()
 
-  func scan(file: File) -> Set<ScanResult> {
+  func scan(item: FileSystem.Item) -> Set<ScanResult> {
     // Open Storyboard, and scan for:
-    guard let fileContents = try? file.readAsString() else { return [] }
+    guard
+      let file = item as? File,
+      let fileContents = try? file.readAsString()
+    else {
+      return []
+    }
 
     var results = Set<ScanResult>()
 
-    let fileResult = ScanResult(type: .storyboardName, identifier: file.nameExcludingExtension)
+    let fileResult = ScanResult(type: .storyboardName, identifier: item.nameExcludingExtension)
     results.insert(fileResult)
 
     type(of: self).storyboardIdentifierRegex.allMatches(in: fileContents).forEach { match in

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Resourceror::ResourcerorCore"
-               BuildableName = "ResourcerorCore.framework"
-               BlueprintName = "ResourcerorCore"
+               BlueprintIdentifier = "Resourceror::resourceror"
+               BuildableName = "resourceror"
+               BlueprintName = "resourceror"
                ReferencedContainer = "container:Resourceror.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Resourceror::resourceror"
-               BuildableName = "resourceror"
-               BlueprintName = "resourceror"
+               BlueprintIdentifier = "Resourceror::ResourcerorCore"
+               BuildableName = "ResourcerorCore.framework"
+               BlueprintName = "ResourcerorCore"
                ReferencedContainer = "container:Resourceror.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -59,9 +59,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Resourceror::ResourcerorCore"
-            BuildableName = "ResourcerorCore.framework"
-            BlueprintName = "ResourcerorCore"
+            BlueprintIdentifier = "Resourceror::resourceror"
+            BuildableName = "resourceror"
+            BlueprintName = "resourceror"
             ReferencedContainer = "container:Resourceror.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -9,16 +9,15 @@ import Regex
 public final class ResourceListGenerator {
   public init() {}
 
-  let scanners: [ResourceScanning] = [StoryboardScanner(), InterfaceBuilderDocumentScanner(), ImageFileScanner(), AudioFileScanner(),]
+  let scanners: [ResourceScanning] = [StoryboardScanner(), InterfaceBuilderDocumentScanner(), ImageFileScanner(), AudioFileScanner(), AssetCatalogScanner()]
 
   public func scanDirectory(at url: URL, excluding: [String] = []) throws {
     try updateScannables(at: url, excluding: excluding)
-
-    let results: Set<ScanResult> = scanners.reduce([]) { $0.union($1.scanFiles()) }
+    let results: Set<ScanResult> = scanners.reduce(into: []) { $0.formUnion($1.scanFileSystem()) }
     let groupedResults = Dictionary(grouping: results, by: { $0.type }).sorted { lhs, rhs -> Bool in
       return lhs.key.rawValue.lexicographicallyPrecedes(rhs.key.rawValue)
     }
-
+    
     for (type, results) in groupedResults {
       print("extension \(type.rawValue) {")
       results.sorted { lhs, rhs in
@@ -29,13 +28,17 @@ public final class ResourceListGenerator {
   }
 
   private func updateScannables(at url: URL, excluding: [String]) throws {
-    let folders = try Folder(path: url.path).makeSubfolderSequence(recursive: false, includeHidden: false)
+    let root = try Folder(path: url.path)
 
+    var itemsToScan: [FileSystem.Item] = []
+    let folders = root.makeSubfolderSequence(recursive: true)
     for folder in folders where excluding.contains(folder.name) == false {
-      for file in folder.files where excluding.contains(file.name) == false { for var scanner in scanners { scanner.appendIfScannable(file: file) } }
+      itemsToScan.append(folder)
+      itemsToScan.append(contentsOf: folder.files.filter { excluding.contains($0.name) == false })
+    }
 
-      let folderURL = URL(fileURLWithPath: folder.path, isDirectory: true)
-      try updateScannables(at: folderURL, excluding: excluding)
+    for item in itemsToScan {
+     for var scanner in scanners { scanner.appendIfScannable(item: item) }
     }
   }
 }

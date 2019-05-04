@@ -6,32 +6,35 @@ import Files
 import Foundation
 
 protocol ResourceScanning {
-  static var fileExtensions: [String] { get }
+  static var itemExtensions: [String] { get }
 
-  var filesToScan: [File] { get set }
+  var itemsToScan: [FileSystem.Item] { get set }
 
-  mutating func appendIfScannable(file: File)
-  func canScan(file: File) -> Bool
-  func scanFiles() -> Set<ScanResult>
-  func scan(file: File) -> Set<ScanResult>
+  mutating func appendIfScannable(item: FileSystem.Item)
+  func canScan(item: FileSystem.Item) -> Bool
+  func scanFileSystem() -> Set<ScanResult>
+  func scan(item: FileSystem.Item) -> Set<ScanResult>
 }
 
 extension ResourceScanning {
-  mutating func appendIfScannable(file: File) {
-    guard canScan(file: file) else { return }
-
-    filesToScan.append(file)
+  mutating func appendIfScannable(item: FileSystem.Item) {
+    guard canScan(item: item) else {
+      return
+    }
+    itemsToScan.append(item)
   }
 
-  func canScan(file: File) -> Bool {
-    guard let fileExtension = file.extension else { return false }
+  func canScan(item: FileSystem.Item) -> Bool {
+    guard let fileExtension = item.extension else { return false }
 
-    return type(of: self).fileExtensions.contains(fileExtension)
+    return type(of: self).itemExtensions.contains(fileExtension)
   }
 
-  func scanFiles() -> Set<ScanResult> {
-    var results = Set<ScanResult>()
-    for fileToScan in filesToScan { results.formUnion(scan(file: fileToScan)) }
-    return results
+  func scanFileSystem() -> Set<ScanResult> {
+    return itemsToScan
+      .map {
+        return self.scan(item: $0)
+      }
+      .reduce(into: Set<ScanResult>()) { $0.formUnion($1) }
   }
 }

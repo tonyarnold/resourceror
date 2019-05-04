@@ -6,15 +6,15 @@ import Files
 import Foundation
 
 final class ImageFileScanner: ResourceScanning {
-  static let fileExtensions = ["png", "jpg", "jpeg", "pdf", "jp2",]
+  static let itemExtensions = ["png", "jpg", "jpeg", "pdf", "jp2"]
 
-  var filesToScan = [File,]()
+  var itemsToScan = [FileSystem.Item]()
 
-  func scan(file: File) -> Set<ScanResult> {
-    let fileName: String
-    if let range = file.nameExcludingExtension.range(of: "@2x") { fileName = String(file.nameExcludingExtension[..<range.lowerBound]) }
-    else { fileName = file.nameExcludingExtension }
+  func scan(item: FileSystem.Item) -> Set<ScanResult> {
+    let itemName: String
+    if let range = item.nameExcludingExtension.range(of: "@2x") { itemName = String(item.nameExcludingExtension[..<range.lowerBound]) }
+    else { itemName = item.nameExcludingExtension }
 
-    return [ScanResult(type: .image, identifier: fileName),]
+    return [ScanResult(type: .image, identifier: itemName)]
   }
 }
