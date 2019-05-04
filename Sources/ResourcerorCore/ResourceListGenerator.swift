@@ -15,9 +15,9 @@ public final class ResourceListGenerator {
     try updateScannables(at: url, excluding: excluding)
     let results: Set<ScanResult> = scanners.reduce(into: []) { $0.formUnion($1.scanFileSystem()) }
     let groupedResults = Dictionary(grouping: results, by: { $0.type }).sorted { lhs, rhs -> Bool in
-      return lhs.key.rawValue.lexicographicallyPrecedes(rhs.key.rawValue)
+      lhs.key.rawValue.lexicographicallyPrecedes(rhs.key.rawValue)
     }
-    
+
     for (type, results) in groupedResults {
       print("extension \(type.rawValue) {")
       results.sorted { lhs, rhs in
@@ -29,16 +29,23 @@ public final class ResourceListGenerator {
 
   private func updateScannables(at url: URL, excluding: [String]) throws {
     let root = try Folder(path: url.path)
+    try updateScannables(in: root, excluding: excluding)
+  }
 
-    var itemsToScan: [FileSystem.Item] = []
-    let folders = root.makeSubfolderSequence(recursive: true)
-    for folder in folders where excluding.contains(folder.name) == false {
-      itemsToScan.append(folder)
-      itemsToScan.append(contentsOf: folder.files.filter { excluding.contains($0.name) == false })
+  private func updateScannables(in folder: Folder, excluding: [String]) throws {
+    guard excluding.contains(folder.name) == false else {
+      return
     }
 
-    for item in itemsToScan {
-     for var scanner in scanners { scanner.appendIfScannable(item: item) }
+    folder.files
+      .filter { excluding.contains($0.name) == false }
+      .forEach {
+        for var scanner in scanners { scanner.appendIfScannable(item: $0) }
+      }
+
+    try folder.subfolders.forEach {
+      for var scanner in scanners { scanner.appendIfScannable(item: $0) }
+      try self.updateScannables(in: $0, excluding: excluding)
     }
   }
 }
