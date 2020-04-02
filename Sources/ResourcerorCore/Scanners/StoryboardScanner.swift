@@ -6,19 +6,16 @@ import Files
 import Foundation
 import Regex
 
-final class StoryboardScanner: ResourceScanning {
-  static let itemExtensions = ["storyboard"]
+final class StoryboardScanner: FileContentsScanning {
+  static let requestedPathExtensions = ["storyboard"]
 
   static let ignoredTags = ["deployment", "plugIn"]
 
-  var itemsToScan = [FileSystem.Item]()
+  var itemsToScan: [File] = []
 
-  func scan(item: FileSystem.Item) -> Set<ScanResult> {
+  func scan(item: File) -> Set<ScanResult> {
     // Open Storyboard, and scan for:
-    guard
-      let file = item as? File,
-      let fileContents = try? file.readAsString()
-    else {
+    guard let fileContents = try? item.readAsString() else {
       return []
     }
 

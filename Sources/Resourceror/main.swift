@@ -2,10 +2,14 @@
 //  Copyright © 2017 Tony Arnold (@tonyarnold)
 //  Licensed under the MIT license. See the LICENSE file for details.
 
-import CommandRegistry
+import ArgumentParser
 
-var program = CommandRegistry(usage: "<subcommand> <options>", overview: "Resourceror generates Swift names for your Xcode project resources")
+struct Resourceror: ParsableCommand {
+    static var configuration = CommandConfiguration(
+        abstract: "Resourceror generates Swift names for your Xcode project resources.",
+        subcommands: [Generate.self],
+        defaultSubcommand: Generate.self
+    )
+}
 
-program.version = "1.0.0"
-program.register(command: GenerateCommand.self)
-program.run()
+Resourceror.main()

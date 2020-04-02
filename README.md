@@ -29,7 +29,7 @@ swift run resourceror generate $PATH_TO_YOUR_DIRECTORY --exclude first_directory
 ## Requirements
 
 - macOS 10.13 or newer
-- Xcode 10.2 / Swift 5.0 or newer
+- Swift 5.2 or newer
 
 ## Notes
 

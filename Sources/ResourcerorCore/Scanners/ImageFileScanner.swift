@@ -5,16 +5,16 @@
 import Files
 import Foundation
 
-final class ImageFileScanner: ResourceScanning {
-  static let itemExtensions = ["png", "jpg", "jpeg", "pdf", "jp2"]
+final class ImageFileScanner: FolderScanning {
+  static let requestedPathExtensions = ["png", "jpg", "jpeg", "pdf", "jp2"]
 
-  var itemsToScan = [FileSystem.Item]()
+  var itemsToScan: [Folder] = []
 
-  func scan(item: FileSystem.Item) -> Set<ScanResult> {
-    let itemName: String
-    if let range = item.nameExcludingExtension.range(of: "@2x") { itemName = String(item.nameExcludingExtension[..<range.lowerBound]) }
-    else { itemName = item.nameExcludingExtension }
+  func scan(item: Folder) -> Set<ScanResult> {
+    let folderName: String
+    if let range = item.nameExcludingExtension.range(of: "@2x") { folderName = String(item.nameExcludingExtension[..<range.lowerBound]) }
+    else { folderName = item.nameExcludingExtension }
 
-    return [ScanResult(type: .image, identifier: itemName)]
+    return [ScanResult(type: .image, identifier: folderName)]
   }
 }

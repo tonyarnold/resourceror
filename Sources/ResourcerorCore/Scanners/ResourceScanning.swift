@@ -5,36 +5,66 @@
 import Files
 import Foundation
 
-protocol ResourceScanning {
-  static var itemExtensions: [String] { get }
+protocol FileContentsScanning {
+  static var requestedPathExtensions: [String] { get }
+  var itemsToScan: [File] { get set }
 
-  var itemsToScan: [FileSystem.Item] { get set }
-
-  mutating func appendIfScannable(item: FileSystem.Item)
-  func canScan(item: FileSystem.Item) -> Bool
+  mutating func appendIfScannable(item: File)
+  func canScan(item: File) -> Bool
   func scanFileSystem() -> Set<ScanResult>
-  func scan(item: FileSystem.Item) -> Set<ScanResult>
+  func scan(item: File) -> Set<ScanResult>
 }
 
-extension ResourceScanning {
-  mutating func appendIfScannable(item: FileSystem.Item) {
+extension FileContentsScanning {
+  mutating func appendIfScannable(item: File) {
     guard canScan(item: item) else {
       return
     }
+
     itemsToScan.append(item)
   }
 
-  func canScan(item: FileSystem.Item) -> Bool {
-    guard let fileExtension = item.extension else { return false }
+  func canScan(item: File) -> Bool {
+    guard let pathExtension = item.extension else { return false }
 
-    return type(of: self).itemExtensions.contains(fileExtension)
+    return type(of: self).requestedPathExtensions.contains(pathExtension)
   }
 
   func scanFileSystem() -> Set<ScanResult> {
     return itemsToScan
-      .map {
-        return self.scan(item: $0)
-      }
+      .map(scan(item:))
+      .reduce(into: Set<ScanResult>()) { $0.formUnion($1) }
+  }
+}
+
+protocol FolderScanning {
+  static var requestedPathExtensions: [String] { get }
+  var itemsToScan: [Folder] { get set }
+
+  mutating func appendIfScannable(item: Folder)
+  func canScan(item: Folder) -> Bool
+  func scanFileSystem() -> Set<ScanResult>
+  func scan(item: Folder) -> Set<ScanResult>
+}
+
+extension FolderScanning {
+  mutating func appendIfScannable(item: Folder) {
+    guard canScan(item: item) else {
+      return
+    }
+
+    itemsToScan.append(item)
+  }
+
+  func canScan(item: Folder) -> Bool {
+    guard let pathExtension = item.extension else { return false }
+
+    return type(of: self).requestedPathExtensions.contains(pathExtension)
+  }
+
+  func scanFileSystem() -> Set<ScanResult> {
+    return itemsToScan
+      .map(scan(item:))
       .reduce(into: Set<ScanResult>()) { $0.formUnion($1) }
   }
 }

@@ -9,12 +9,14 @@ import Regex
 public final class ResourceListGenerator {
   public init() {}
 
-  let scanners: [ResourceScanning] = [StoryboardScanner(), InterfaceBuilderDocumentScanner(), ImageFileScanner(), AudioFileScanner(), AssetCatalogScanner()]
+  let fileContentsScanners: [FileContentsScanning] = [StoryboardScanner(), InterfaceBuilderDocumentScanner()]
+  let folderScanners: [FolderScanning] = [ImageFileScanner(), AudioFileScanner(), AssetCatalogScanner()]
 
   public func scanDirectory(at url: URL, excluding: [String] = []) throws {
     try updateScannables(at: url, excluding: excluding)
-    let results: Set<ScanResult> = scanners.reduce(into: []) { $0.formUnion($1.scanFileSystem()) }
-    let groupedResults = Dictionary(grouping: results, by: { $0.type }).sorted { lhs, rhs -> Bool in
+    let fileResults: Set<ScanResult> = fileContentsScanners.reduce(into: []) { $0.formUnion($1.scanFileSystem()) }
+    let folderResults: Set<ScanResult> = folderScanners.reduce(into: []) { $0.formUnion($1.scanFileSystem()) }
+    let groupedResults = Dictionary(grouping: fileResults.union(folderResults), by: { $0.type }).sorted { lhs, rhs -> Bool in
       lhs.key.rawValue.lexicographicallyPrecedes(rhs.key.rawValue)
     }
 
@@ -40,11 +42,12 @@ public final class ResourceListGenerator {
     folder.files
       .filter { excluding.contains($0.name) == false }
       .forEach {
-        for var scanner in scanners { scanner.appendIfScannable(item: $0) }
+        for var scanner in fileContentsScanners { scanner.appendIfScannable(item: $0) }
       }
 
     try folder.subfolders.forEach {
-      for var scanner in scanners { scanner.appendIfScannable(item: $0) }
+      for var scanner in folderScanners { scanner.appendIfScannable(item: $0) }
+
       try self.updateScannables(in: $0, excluding: excluding)
     }
   }

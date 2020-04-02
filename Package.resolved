@@ -2,30 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "CommandRegistry",
-        "repositoryURL": "https://github.com/eneko/CommandRegistry",
-        "state": {
-          "branch": null,
-          "revision": "4c953e485307caf1b97565a0834ac447609647ff",
-          "version": "0.3.0"
-        }
-      },
-      {
         "package": "Files",
-        "repositoryURL": "https://github.com/johnsundell/Files",
+        "repositoryURL": "https://github.com/johnsundell/Files.git",
         "state": {
           "branch": null,
-          "revision": "a84615f4558151fab52ac38df697ce2442991f93",
-          "version": "2.3.0"
-        }
-      },
-      {
-        "package": "Logger",
-        "repositoryURL": "https://github.com/eneko/Logger.git",
-        "state": {
-          "branch": null,
-          "revision": "146a17c68a442859ec409b2ae1a23d1913d48c5d",
-          "version": "0.0.2"
+          "revision": "22fe84797d499ffca911ccd896b34efaf06a50b9",
+          "version": "4.1.1"
         }
       },
       {
@@ -33,17 +15,17 @@
         "repositoryURL": "https://github.com/sharplet/Regex.git",
         "state": {
           "branch": null,
-          "revision": "a819aed0e9555268c29a62500fe6fb781ae7f57d",
-          "version": "2.1.0"
+          "revision": "76c2b73d4281d77fc3118391877efd1bf972f515",
+          "version": "2.1.1"
         }
       },
       {
-        "package": "SwiftPM",
-        "repositoryURL": "https://github.com/apple/swift-package-manager.git",
+        "package": "swift-argument-parser",
+        "repositoryURL": "https://github.com/apple/swift-argument-parser",
         "state": {
           "branch": null,
-          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
-          "version": "0.3.0"
+          "revision": "8d31a0905c346a45c87773ad50862b5b3df8dff6",
+          "version": "0.0.4"
         }
       }
     ]

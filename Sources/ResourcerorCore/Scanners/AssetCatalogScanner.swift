@@ -6,19 +6,15 @@ import Foundation
 import os.log
 import Regex
 
-final class AssetCatalogScanner: ResourceScanning {
-  static let itemExtensions = ["xcassets"]
+final class AssetCatalogScanner: FolderScanning {
+  static let requestedPathExtensions = ["xcassets"]
 
-  var itemsToScan: [FileSystem.Item] = []
+  var itemsToScan: [Folder] = []
 
-  func scan(item: FileSystem.Item) -> Set<ScanResult> {
-    guard let folder = item as? Folder else {
-      return []
-    }
-
-    let results = try? folder.makeSubfolderSequence(recursive: true, includeHidden: false)
+  func scan(item: Folder) -> Set<ScanResult> {
+    let results = try? item.subfolders.recursive
       .filter { $0.extension == "colorset" || $0.extension == "imageset" }
-      .compactMap { try self.scanCatalog(folder: $0) }
+      .compactMap(scanCatalog(folder:))
 
     return Set(results ?? [])
   }
@@ -32,14 +28,16 @@ final class AssetCatalogScanner: ResourceScanning {
   }
 
   private func scanCatalog(folder: Folder) throws -> ScanResult? {
-    let parentFolders = folder.parents(upTo: { item in
-      guard let itemExtension = item.extension else {
-        return false
+    let parentFolders = sequence(first: folder) { element in
+      guard
+        let itemExtension = element.extension,
+        AssetCatalogScanner.requestedPathExtensions.contains(itemExtension)
+      else {
+        return element.parent
       }
 
-      return AssetCatalogScanner.itemExtensions.contains(itemExtension)
-    })
-      .compactMap { $0 as? Folder }
+      return nil
+    }
 
     let prefix = try parentFolders
       .compactMap { try self.scanAssetGroup(folder: $0) }
